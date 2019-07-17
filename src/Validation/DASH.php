@@ -15,7 +15,8 @@ class DASH extends Validation
             '7' => self::VERSION_P2SH
         ],
         'testnet' => [
-            
+            'y' => '8c',
+            '8' => '13',
         ]
     ];
 

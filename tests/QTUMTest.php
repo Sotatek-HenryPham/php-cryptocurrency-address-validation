@@ -19,12 +19,13 @@ class QTUMTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testTestnetAddress()
+    public function testQtumTestnetAddress()
     {
 
         $testData = [
             ['qbgHcqxXYHVJZXHheGpHwLJsB5epDUtWxe', true],
             ['qZqqcqCsVtP2U38WWaUnwshHRpefvCa8hX', true],
+            ['mcfszWBwhekTy3paaMhmBshmhUH9RxavLC', true],
         ];
 
         foreach ($testData as $row) {

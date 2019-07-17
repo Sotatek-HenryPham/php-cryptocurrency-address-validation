@@ -25,4 +25,18 @@ class DASHTest extends \PHPUnit\Framework\TestCase
         }
 
     }
+
+    public function testDashTestnetAddress()
+    {
+        $testData = [
+            ['yPv7h2i8v3dJjfSH4L3x91JSJszjdbsJJA', true],
+            ['8pnSb1srBot8bfdfFjdkgvpRCkBTNMohtC', true],
+            ['dCWFddi6m4ndiGyKqzYvsFYagqDLPVMTzC', false],
+        ];
+
+        foreach ($testData as $row) {
+            $validator = new DASH($row[0], 'testnet');
+            $this->assertEquals($row[1], $validator->validate(), $row[0]);
+        }
+    }
 }

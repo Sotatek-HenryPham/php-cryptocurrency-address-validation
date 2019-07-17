@@ -14,9 +14,7 @@ class DGB extends Validation
         'prod' => [
             'D' => '1e',
         ],
-        'testnet' => [
-
-        ],
+        'testnet' => [],
     ];
 
     protected function validateVersion($version)

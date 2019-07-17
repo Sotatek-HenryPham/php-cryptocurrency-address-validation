@@ -13,8 +13,8 @@ class QTUM extends Validation
             'M' => '32',
         ],
         'testnet' => [
-            'q' => '78'
-            // ? => '6e'
+            'q' => '78',
+            'm' => '6e',
         ]
     ];
 }
