@@ -1,5 +1,5 @@
 {
-    "name": "k7g/php-cryptocurrency-address-validation",
+    "name": "henry/php-cryptocurrency-address-validation",
     "description": "Cryptocurrency address validation.",
     "authors": [
         {
@@ -9,6 +9,10 @@
         {
             "name": "Igor Salmin",
             "email": "isalmin@gmail.com"
+        },
+        {
+            "name": "Henry Pham",
+            "email": "pqh.hl2909@gmail.com"
         }
     ],
     "require": {

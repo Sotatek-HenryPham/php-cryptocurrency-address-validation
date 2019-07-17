@@ -11,13 +11,23 @@ abstract class Validation implements ValidationInterface
 
     protected $address;
     protected $addressVersion;
-    protected $base58PrefixToHexVersion;
+    protected $base58PrefixToHexVersion = [
+        'prod' => [],
+        'testnet' => [],
+    ];
     protected $length = 50;
 
-    public function __construct($address)
+    public function __construct($address, $networkType = null)
     {
         $this->address = $address;
-        $this->determineVersion();
+
+        if ($networkType === 'prod' || $networkType === 'testnet') {
+            $correctAddressTypes = $this->base58PrefixToHexVersion[$networkType];
+        } else {
+            $correctAddressTypes = $this->base58PrefixToHexVersion['prod'] + $this->base58PrefixToHexVersion['testnet'];
+        }
+
+        $this->determineVersion($correctAddressTypes);
     }
 
     protected static function decodeHex($hex)
@@ -134,11 +144,11 @@ abstract class Validation implements ValidationInterface
         return hexdec($version) == hexdec($this->addressVersion);
     }
 
-    protected function determineVersion()
+    protected function determineVersion($correctAddressTypes)
     {
-        if (isset($this->base58PrefixToHexVersion[$this->address[0]])) {
+        if (isset($correctAddressTypes[$this->address[0]])) {
             $this->addressVersion
-                = $this->base58PrefixToHexVersion[$this->address[0]];
+                = $correctAddressTypes[$this->address[0]];
         }
     }
 
@@ -147,12 +157,12 @@ abstract class Validation implements ValidationInterface
         if (is_null($this->addressVersion)) {
             return false;
         }
-
         $hexAddress = self::base58ToHex($this->address);
 
         if (strlen($hexAddress) != $this->length) {
             return false;
         }
+
         $version = substr($hexAddress, 0, 2);
 
         if (!$this->validateVersion($version)) {

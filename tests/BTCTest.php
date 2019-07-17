@@ -19,4 +19,18 @@ class BTCTest extends \PHPUnit\Framework\TestCase
         }
 
     }
+
+    public function testTestnetAddress()
+    {
+        $testData = [
+            ['mtPm4vxbDeNbX6yMpSSDeSJkVTRpcH7dWq', true],
+            ['2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', true],
+            ['dCWFddi6m4ndiGyKqzYvsFYagqDLPVMTzC', false],
+        ];
+
+        foreach ($testData as $row) {
+            $validator = new BTC($row[0], 'testnet');
+            $this->assertEquals($row[1], $validator->validate(), $row[0]);
+        }
+    }
 }

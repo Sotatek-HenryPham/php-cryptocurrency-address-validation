@@ -14,7 +14,7 @@ class ZEC implements ValidationInterface
     /** @var  ZECZ */
     protected $zecz;
 
-    public function __construct($address)
+    public function __construct($address, $networkType = null)
     {
         $this->zect = new ZECT($address);
         $this->zecz = new ZECZ($address);

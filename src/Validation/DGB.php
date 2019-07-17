@@ -11,7 +11,12 @@ class DGB extends Validation
     protected $deprecatedAllowed = false;
 
     protected $base58PrefixToHexVersion = [
-        'D' => '1e'
+        'prod' => [
+            'D' => '1e',
+        ],
+        'testnet' => [
+
+        ],
     ];
 
     protected function validateVersion($version)

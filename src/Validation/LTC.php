@@ -11,9 +11,16 @@ class LTC extends Validation
     protected $deprecatedAllowed = false;
 
     protected $base58PrefixToHexVersion = [
-        'L' => '30',
-        'M' => '31',
-        '3' => self::DEPRECATED_ADDRESS_VERSION // deprecated for litecoin, should not be allowed for new user's inputs
+        'prod' => [
+            'L' => '30',
+            'M' => '32',
+            '3' => self::DEPRECATED_ADDRESS_VERSION // deprecated for litecoin, should not be allowed for new user's inputs
+        ],
+        'testnet' => [
+            'm' => '6f',
+            '2' => 'c4',
+            'Q' => '3a',
+        ]
     ];
 
     protected function validateVersion($version)

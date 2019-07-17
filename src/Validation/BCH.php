@@ -25,6 +25,17 @@ class BCH extends Validation
         512 => 7,
     ];
 
+    protected $base58PrefixToHexVersion = [
+        'prod' => [
+            '1' => '00',
+            '3' => '05',
+        ],
+        'testnet' => [
+            'm' => '6f',
+            '2' => 'c4',
+        ],
+    ];
+
     /**
      * @var array
      */
@@ -35,16 +46,19 @@ class BCH extends Validation
 
     public function validate()
     {
+        $addr = $this->address;
         try {
-            $addr = $this->address;
-            if (strpos($addr, ":") === false) {
+            if (strpos($addr, ":") === false && is_null($this->addressVersion)) {
                 $addr = "bitcoincash:".$addr;
             }
             static::decode($addr);
+            return true;
         } catch (Exception $e) {
-            return false;
+            if (is_null($this->addressVersion)) {
+                return false;
+            }
+            return parent::validate($addr);
         }
-        return true;
     }
 
     /**

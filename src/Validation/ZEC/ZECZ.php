@@ -9,6 +9,11 @@ class ZECZ extends Validation
     protected $length = 140;
 
     protected $base58PrefixToHexVersion = [
-        'z' => '16'
+        'prod' => [
+            'z' => '16'
+        ],
+        'testnet' => [
+
+        ]
     ];
 }

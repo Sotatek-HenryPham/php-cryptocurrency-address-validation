@@ -16,6 +16,7 @@ class LTCTest extends \PHPUnit\Framework\TestCase
             ['1QLbGuc3WGKKKpLs4pBp9H6jiQ2MgPkXRp', false],
             ['3CDJNfdWX8m2NwuGUV3nhXHXEeLygMXoAj', false],
             ['LbTjMGN7gELw4KbeyQf6cTCq859hD18guE', true],
+            ['MK9xC9sbktt6DHMF6XwA3eZPJ2Vx32AXFT', true],
             // @todo: add test case with M address
         ];
 
@@ -31,5 +32,20 @@ class LTCTest extends \PHPUnit\Framework\TestCase
         $validator = new LTC('3CDJNfdWX8m2NwuGUV3nhXHXEeLygMXoAj');
         $validator->setDeprecatedAllowed(true);
         $this->assertEquals(true, $validator->validate());
+    }
+
+    public function testLtcTestnetAddress()
+    {
+        $testData = [
+            ['mtPm4vxbDeNbX6yMpSSDeSJkVTRpcH7dWq', true],
+            ['2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', true],
+            ['QiqpHzFuo4sM7Yftf2vvJwUy5Wiuv2BqF7', true],
+            ['dCWFddi6m4ndiGyKqzYvsFYagqDLPVMTzC', false],
+        ];
+
+        foreach ($testData as $row) {
+            $validator = new LTC($row[0], 'testnet');
+            $this->assertEquals($row[1], $validator->validate(), $row[0]);
+        }
     }
 }
